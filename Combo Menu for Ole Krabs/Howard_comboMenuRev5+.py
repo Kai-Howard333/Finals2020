@@ -4,6 +4,7 @@ menuList = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23]   #indi
 foodList = ["KRABBY PATTY","KRABBY PATTY w/sea cheese","DOUBLE KRABBY PATTY","DOUBLE KRABBY PATTY w/sea cheese","TRiPLE KRABBY PATTY","TRiPLE KRABBY PATTY w/sea cheese","KRABBY MEAL","DOUBLE KRABBY MEAL","TRiPLE KRABBY MEAL","SALTY SEA DOG","FOOTLONG","SAiLORS SURPRiSE","GOLDEN LOAF","GOLDEN LOAF w/sauce","CORAL BiTS (Small)","CORAL BiTS (Medium)","CORAL BiTS (Large)","KELP RiNGS","KELP RiNGS w/salty sauce","KELP SHAKE","SEAFOAM SODA (Small)","SEAFOAM SODA (Medium)","SEAFOAM SODA (Large)"]
 costList = [    1.25      ,             1.50          ,        2.00         ,               2.50               ,         3.00        ,              3.50                ,    3.50     ,        3.75        ,        4.00        ,      1.25     ,   2.00   ,      3.00        ,     2.00    ,         2.50        ,         1.00       ,        1.25         ,        1.50        ,    1.50    ,            2.00          ,     2.00   ,        1.00          ,         1.25          ,         1.50         ]
 #the costs of each food according to the number (indices) ^ (above)
+orderNum = []
 listList = []
 orderList = []
 def menu():
@@ -23,9 +24,11 @@ def menu():
                                21 Small.....1.00
      18 KELP RiNGS.......1.50  22 Medium....1.25
      19     salty sauce.. .50  23 Large.....1.50\n''')
-
+tax = 0.0
+total = 0.0
 def order():
-    total = 0.0
+    global total
+    global tax
 
     order = 100
     while order != 0:
@@ -45,9 +48,7 @@ def order():
         except:
             print("Invalid Choice, Enter what's on the Menu (1-23) ")
     listList.append(orderList)    
-    print("Subtotal: ",total)
-    print("Tax: 7%")
-    print("Total: ",tax)    
+
 
 
 
@@ -59,18 +60,11 @@ print(menu())
 while times != 0:
     order()
     newOrder = input("Do you want to make a new order? (y/n) ")
-    if newOrder == "y":
-        while t !=0:
-            order()
-            newOrder = input("Do you want to make a new order? (y/n) ")
-            if newOrder == "y":
-                order()
-            elif newOrder == "n":
-                print("Here's your order\n")
-                for x in listList:
-                    print(x)
-                t -=1
-    elif newOrder == "n":
+    if newOrder == "n":
         print("Here's your order\n")
         for x in listList:
-            print(x)
+            for i in x:
+                print(i)
+    print("Subtotal: ",total)
+    print("Tax: 7%")
+    print("Total: ",tax)   
