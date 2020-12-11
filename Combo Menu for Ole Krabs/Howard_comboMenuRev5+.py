@@ -1,3 +1,11 @@
+menuList = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23]   #indices of the Menu
+#the food according to the numbers (indices) they are connected too   v (below)
+#               1                          2                   3                   4                                    5                              6                       7              8                       9                10             11             12             13                  14                  15                  16                  17                  18                  19                  20                  21                   22                     23
+foodList = ["KRABBY PATTY","KRABBY PATTY w/sea cheese","DOUBLE KRABBY PATTY","DOUBLE KRABBY PATTY w/sea cheese","TRiPLE KRABBY PATTY","TRiPLE KRABBY PATTY w/sea cheese","KRABBY MEAL","DOUBLE KRABBY MEAL","TRiPLE KRABBY MEAL","SALTY SEA DOG","FOOTLONG","SAiLORS SURPRiSE","GOLDEN LOAF","GOLDEN LOAF w/sauce","CORAL BiTS (Small)","CORAL BiTS (Medium)","CORAL BiTS (Large)","KELP RiNGS","KELP RiNGS w/salty sauce","KELP SHAKE","SEAFOAM SODA (Small)","SEAFOAM SODA (Medium)","SEAFOAM SODA (Large)"]
+costList = [    1.25      ,             1.50          ,        2.00         ,               2.50               ,         3.00        ,              3.50                ,    3.50     ,        3.75        ,        4.00        ,      1.25     ,   2.00   ,      3.00        ,     2.00    ,         2.50        ,         1.00       ,        1.25         ,        1.50        ,    1.50    ,            2.00          ,     2.00   ,        1.00          ,         1.25          ,         1.50         ]
+#the costs of each food according to the number (indices) ^ (above)
+listList = []
+orderList = []
 def menu():
     return('''
                           GALLEY GRUB
@@ -18,16 +26,7 @@ def menu():
 
 def order():
     total = 0.0
-    menuList = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23]   #indices of the Menu
-    #the food according to the numbers (indices) they are connected too   v (below)
-    #               1                          2                   3                   4                                    5                              6                       7              8                       9                10             11             12             13                  14                  15                  16                  17                  18                  19                  20                  21                   22                     23
-    foodList = ["KRABBY PATTY","KRABBY PATTY w/sea cheese","DOUBLE KRABBY PATTY","DOUBLE KRABBY PATTY w/sea cheese","TRiPLE KRABBY PATTY","TRiPLE KRABBY PATTY w/sea cheese","KRABBY MEAL","DOUBLE KRABBY MEAL","TRiPLE KRABBY MEAL","SALTY SEA DOG","FOOTLONG","SAiLORS SURPRiSE","GOLDEN LOAF","GOLDEN LOAF w/sauce","CORAL BiTS (Small)","CORAL BiTS (Medium)","CORAL BiTS (Large)","KELP RiNGS","KELP RiNGS w/salty sauce","KELP SHAKE","SEAFOAM SODA (Small)","SEAFOAM SODA (Medium)","SEAFOAM SODA (Large)"]
-    costList = [    1.25      ,             1.50          ,        2.00         ,               2.50               ,         3.00        ,              3.50                ,    3.50     ,        3.75        ,        4.00        ,      1.25     ,   2.00   ,      3.00        ,     2.00    ,         2.50        ,         1.00       ,        1.25         ,        1.50        ,    1.50    ,            2.00          ,     2.00   ,        1.00          ,         1.25          ,         1.50         ]
-    #the costs of each food according to the number (indices) ^ (above)
-    listList = []
-    orderList = []
-    print("Welcome to the Krusty Krab, May I take your order ?")
-    print(menu())
+
     order = 100
     while order != 0:
         # while True:
@@ -42,27 +41,36 @@ def order():
                 print(Cost)
                 orderList.append(Item)
                 total += Cost
-                tax = total * 1.07
+                tax = float(format(total * 1.07,'.2f'))
         except:
             print("Invalid Choice, Enter what's on the Menu (1-23) ")
     listList.append(orderList)    
     print("Subtotal: ",total)
     print("Tax: 7%")
     print("Total: ",tax)    
-order()
-    #But you could contain the top two lines into one
-    #     orderList.append(order)
 
-# print("Your total is", '${:,.2f}'.format(total))     #string formating
 
-# print("Your combo menu is as follows" + order+ "sandwich")
-"""
-    print(
-        "Your order is:,
-    {0} sandwich,
-    {1} drink,
-    {2} fries,
-    {3} packets
-    For a total of, '${:,.2f}'
-    .format(order,userShake,userCoral,userKetchup,total))
-"""
+
+
+t = 1
+times = 1
+print("Welcome to the Krusty Krab, May I take your order ?")
+print(menu())
+while times != 0:
+    order()
+    newOrder = input("Do you want to make a new order? (y/n) ")
+    if newOrder == "y":
+        while t !=0:
+            order()
+            newOrder = input("Do you want to make a new order? (y/n) ")
+            if newOrder == "y":
+                order()
+            elif newOrder == "n":
+                print("Here's your order\n")
+                for x in listList:
+                    print(x)
+                t -=1
+    elif newOrder == "n":
+        print("Here's your order\n")
+        for x in listList:
+            print(x)
